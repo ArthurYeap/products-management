@@ -5,7 +5,7 @@ import {
     Link,
     useNavigate
 } from "react-router-dom";
-function Login() {
+function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate()
@@ -29,7 +29,7 @@ function Login() {
     return (
         <div className="login-wrapper">
             <form onSubmit={handleSubmit} className="login-card">
-                <h2>Welcome Back</h2>
+                <h2>Register Page</h2>
 
                 <div className="form-group">
                     <label htmlFor="email">Email Address</label>
@@ -66,4 +66,4 @@ function Login() {
     );
 }
 
-export default Login
+export default Register

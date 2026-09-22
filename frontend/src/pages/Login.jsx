@@ -1,12 +1,19 @@
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 import './Login.css';
 import axios from 'axios';
 import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate()
 
+    useEffect(() => {
+        const userToken = localStorage.getItem("token");
+        console.log(userToken);
+        if (userToken !== null) navigate("/products");
+    }, []);
     const handleSubmit = async (e) => {
         e.preventDefault();
         // 💡 Add your login / authentication logic here
@@ -16,8 +23,10 @@ function Login() {
                 email,
                 password
             })
+            localStorage.setItem("token", response.data.token)
             console.log("Login successful: ", response.data)
             alert("Login Successful!")
+            navigate('/products')
         } catch (error) {
             console.log('Login Error: ', error)
         }
