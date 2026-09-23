@@ -1,6 +1,6 @@
 import { useState , useEffect} from 'react';
 import './Login.css';
-import axios from 'axios';
+import api from "../utils/api";
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 
@@ -19,7 +19,7 @@ function Login() {
         // 💡 Add your login / authentication logic here
         console.log('Form submitted:', { email, password });
         try {
-            const response = await axios.post("http://localhost:3000/users/login", {
+            const response = await api.post("/users/login", {
                 email,
                 password
             })

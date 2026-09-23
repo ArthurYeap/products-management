@@ -5,9 +5,11 @@ const userRoutes = require("./routes/userRoute")
 const productRoutes = require("./routes/productRoute")
 const cors = require('cors')
 
+require("dotenv").config();
+
 const corsHandler = cors({
     origin: "*",
-    methods: "GET,POST,PUT,DELETE",
+    methods: "GET,POST,PUT,DELETE,PATCH",
     allowedHeaders: ["Content-Type", "Authorization"],
     optionsSuccessStatus: 200,
     preflightContinue: true
@@ -16,7 +18,7 @@ const corsHandler = cors({
 app.use(corsHandler)
 
 mongoose
-    .connect("mongodb://localhost:27017/b18-jwt-products")
+    .connect(process.env.MONGODB_URI)
     .then(() => {
         console.log("MongoDB Connected")
     })
@@ -25,7 +27,7 @@ mongoose
 app.use("/users", userRoutes)
 app.use("/products", productRoutes)
 
-const PORT = 3000
+const PORT = process.env.PORT
 
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`)
